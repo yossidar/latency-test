@@ -9,13 +9,15 @@
 9. Run:  python .\latency.py .\record.mp4
     You should expect output similar to this:
 ```
-   Video FPS: 60.00
-   
-   Latency results:
-   Frames (avg=51.25): [51, 50, 66, 48, 48, 44, 52, 51]
-   Millis (avg=854): [850, 833, 1100, 800, 800, 733, 867, 850]
+========================
+Video FPS: 60.00
 
-   Detected clicks: 8
+Latency results:
+Frames (avg=51.25): [51, 50, 66, 48, 48, 44, 52, 51]
+Millis (avg=854): [850, 833, 1100, 800, 800, 733, 867, 850]
+
+Detected clicks: 8
+========================
 ```
 11. Debug mode: You can run it in debug mode:
    Run: python .\latency.py .\record.mp4 --debug
