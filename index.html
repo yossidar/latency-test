@@ -19,28 +19,28 @@
     font-family: Arial, sans-serif;
   }
 
-  /* Square: 2x size */
+  /* Square */
   #square {
     width: 300px;
     height: 300px;
     background: white;
     border: 8px solid green;
-    margin-bottom: 80px; /* doubled distance */
+    margin-bottom: 80px; /* distance stays the same */
   }
 
   #square.black {
     background: black;
   }
 
-  /* Button: enlarged + no effects */
+  /* Button: 2x width & height, no text, no effects */
   #btn {
-    padding: 20px 40px;
-    font-size: 32px;
-    cursor: pointer;
+    width: 160px;
+    height: 160px;
 
     background: #f2f2f2;
     border: 2px solid #333;
     border-radius: 8px;
+    cursor: pointer;
 
     outline: none;
     box-shadow: none;
@@ -63,13 +63,13 @@
 <body>
 
 <div id="square"></div>
-<button id="btn" type="button">Toggle Color</button>
+<button id="btn" type="button" aria-label="Toggle color"></button>
 
 <script>
   const square = document.getElementById("square");
   const btn = document.getElementById("btn");
 
-  // Use pointerdown for minimum latency
+  // Minimum-latency interaction
   btn.addEventListener("pointerdown", (e) => {
     e.preventDefault();
     square.classList.toggle("black");
