@@ -9,7 +9,6 @@
 9. Run:  python .\latency.py .\record.mp4
     You should expect output similar to this:
    
-    ========================
     Video FPS: 60.00
 
     Latency results:
@@ -17,7 +16,7 @@
     Millis (avg=854): [850, 833, 1100, 800, 800, 733, 867, 850]
     
     Detected clicks: 8
-    ========================
+
 11. Debug mode: You can run it in debug mode:
    Run: python .\latency.py .\record.mp4 --debug
    It will save into a folder screenshot of the detected area of the Button, the toggled square, and each click/color-change.
