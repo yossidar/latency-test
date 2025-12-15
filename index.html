@@ -1,56 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Fast Toggle</title>
-
+<meta charset="UTF-8" />
+<title>Toggle Square Color</title>
 <style>
-    html, body {
-        margin: 0;
-        height: 100%;
-    }
+  html, body {
+    margin: 0;
+    height: 100%;
+  }
 
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        user-select: none;
-    }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-family: Arial, sans-serif;
+  }
 
-    #square {
-        width: 150px;
-        height: 150px;
-        background: white;
-        border: 4px solid green;
-        margin-bottom: 20px;
-    }
+  /* Square: 2x size */
+  #square {
+    width: 300px;
+    height: 300px;
+    background: white;
+    border: 8px solid green;
+    margin-bottom: 40px;
+  }
 
-    #square.black {
-        background: black;
-    }
+  #square.black {
+    background: black;
+  }
 
-    button {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+  /* Button: 2x-ish size + no press/hover/focus effects */
+  #btn {
+    padding: 20px 40px;
+    font-size: 32px;
+    cursor: pointer;
+
+    background: #f2f2f2;
+    border: 2px solid #333;
+    border-radius: 8px;
+
+    /* remove common interaction visuals */
+    outline: none;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  #btn:focus,
+  #btn:active,
+  #btn:hover {
+    outline: none;
+    box-shadow: none;
+    background: #f2f2f2; /* keep identical */
+    transform: none;
+    filter: none;
+  }
 </style>
 </head>
-
 <body>
 
 <div id="square"></div>
-<button id="btn">Toggle Color</button>
+<button id="btn" type="button">Toggle Color</button>
 
 <script>
-    const square = document.getElementById("square");
-    const btn = document.getElementById("btn");
+  const square = document.getElementById("square");
+  const btn = document.getElementById("btn");
 
-    btn.addEventListener("pointerdown", () => {
-        square.classList.toggle("black");
-    });
+  // pointerdown triggers immediately (no "click" delay)
+  btn.addEventListener("pointerdown", (e) => {
+    e.preventDefault();           // reduce focus/selection side-effects
+    square.classList.toggle("black");
+  });
 </script>
 
-</body>
-</html>
+</body
