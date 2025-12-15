@@ -1,16 +1,21 @@
 The purpose of the repo is to help with measuring user-display latency.
 
-How it works:
+**How it works:**
+---------------
 1. You open a device and navigate to a dedicated webpage that simplifies screen change detection.
 2. You record your desktop screen and perform several clicks on this webpage.
 3. You provide the recording to the program (latency.py), which counts the frames between each click and the corresponding change on the screen and prints the results.
 
-This repo contains:
+
+**This repo contains:**
+---------------------
 1. The webpage (public and published: https://yossidar.github.io/latency-test)
 2. The latency test program: latency.py
 3. An example of a recorded desktop session: example.mp4
 
-How to use:
+
+**How to use:**
+-------------
 1. Install Python.
 2. Install required libraries: pip install opencv-python numpy
 3. Open a device and navigate to: https://yossidar.github.io/latency-test/
