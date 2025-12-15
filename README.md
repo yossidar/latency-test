@@ -1,27 +1,81 @@
-The purpose of the repo is to help with misurring user-display latency.
+User–Display Latency Measurement Tool
 
-How it works:
-1. You open a device and nevigate to a dedicated webpage that simplifies screen changes detection.
-2. You record your desktop screen and perform some clicks in this webpage.
-3. You give the record to the program (latency.py) that counts the frames frames between each click to the change on the screen and print the results.
+This repository provides a simple and practical way to measure user-to-display latency by analyzing a recorded screen session frame-by-frame.
 
-This repo contains:
-1. The webpage (public and published. https://yossidar.github.io/latency-test)
-2. The latency-test program: latency.py
-3. Example of a recorded desktop session: example.mp4
+The approach is based on detecting the time (in frames and milliseconds) between a user click and the corresponding visual change on the screen.
 
-How to use:
-1. Install python
-2. Install required libraries: pip install opencv-python numpy
-3. Open device >> navigate to >> https://yossidar.github.io/latency-test/
-4. Start record your screen
-5. Click several times on the toggle button (the lower square) - the upper square should toggle colors between black and white on each click.
-6. Save your record to a file.
-7. Download latency.py
-8. Put the record video at the same folder (just for simplicity)
-9. Run:  python .\latency.py .\record.mp4
-    You should expect output similar to this:
-```
+How It Works
+
+You open a device (physical or mirrored) and navigate to a dedicated test webpage designed to make screen changes easy to detect.
+
+You record your desktop screen while interacting with the webpage.
+
+You provide the recorded video to the analysis program (latency.py).
+
+The program automatically:
+
+Detects click events
+
+Detects visual changes on the screen
+
+Counts the number of frames between each click and the corresponding screen update
+
+Prints latency results in frames and milliseconds
+
+Repository Contents
+
+This repository includes:
+
+Test Webpage
+A public webpage used for latency testing:
+👉 https://yossidar.github.io/latency-test
+
+Latency Analysis Program
+
+latency.py — analyzes a recorded video and measures latency
+
+Example Recording
+
+example.mp4 — sample desktop recording demonstrating the workflow
+
+How to Use
+1️⃣ Prerequisites
+
+Install Python
+
+Install required libraries:
+
+pip install opencv-python numpy
+
+2️⃣ Perform a Test Recording
+
+Open your device or device mirror on your desktop.
+
+Navigate to:
+👉 https://yossidar.github.io/latency-test/
+
+Start recording your desktop screen.
+
+Click several times on the toggle button (the lower square).
+
+On each click, the upper square toggles between black and white.
+
+Stop the recording and save it as a video file.
+
+3️⃣ Analyze the Recording
+
+Download latency.py.
+
+Place the recorded video file in the same folder as latency.py (for simplicity).
+
+Run the analysis:
+
+python latency.py record.mp4
+
+4️⃣ Expected Output
+
+You should see output similar to the following:
+
 ========================
 Video FPS: 60.00
 
@@ -31,8 +85,41 @@ Millis (avg=854): [850, 833, 1100, 800, 800, 733, 867, 850]
 
 Detected clicks: 8
 ========================
-```
-11. Debug mode: You can run it in debug mode:
-   Run: python .\latency.py .\record.mp4 --debug
-   It will save into a folder screenshot of the detected area of the Button, the toggled square, and each click/color-change.
-         
+
+
+Frames: Number of frames between each click and the screen update
+
+Millis: Latency in milliseconds (calculated from video FPS)
+
+Detected clicks: Number of valid click events found in the recording
+
+Debug Mode (Optional)
+
+For validation and troubleshooting, you can run the program in debug mode:
+
+python latency.py record.mp4 --debug
+
+
+Debug mode will:
+
+Save screenshots to a timestamped folder
+
+Include:
+
+Detected button area
+
+Detected toggling square
+
+Each click frame
+
+Each corresponding screen-change frame
+
+This allows visual verification that detection is working correctly.
+
+Notes
+
+The measurement is frame-accurate and independent of browser or OS timing.
+
+Results depend on the FPS of the recording — higher FPS yields more precise measurements.
+
+The tool is suitable for comparing latency across devices, environments, or configurations.
