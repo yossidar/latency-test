@@ -37,4 +37,4 @@ Detected clicks: 8
 7. Debug mode: You can run it in debug mode:
 Run: python .\latency.py .\record.mp4 --debug
 It will save screenshots into a folder showing the detected button area, the toggled square, and each click/color change.
-8. Add --json to print results in JSON (useful for CI/automation)
+8. Run with --json to print results in JSON (useful for CI/automation)
