@@ -5,14 +5,11 @@ import os
 import json
 from datetime import datetime
 
-print("========================")
-
 # ==========================
 # ARGUMENTS
 # ==========================
 if len(sys.argv) < 2:
     print("Usage: python latency.py <video_file> [--debug] [--json]")
-    print("========================")
     sys.exit(1)
 
 VIDEO_PATH = sys.argv[1]
@@ -23,13 +20,15 @@ SUPPORTED_EXTENSIONS = (".mp4", ".mov")
 
 if not VIDEO_PATH.lower().endswith(SUPPORTED_EXTENSIONS):
     print("Error: unsupported video format. Supported formats: .mp4, .mov")
-    print("========================")
     sys.exit(1)
 
 if not os.path.isfile(VIDEO_PATH):
     print(f"Error: file not found: {VIDEO_PATH}")
-    print("========================")
     sys.exit(1)
+
+# Print header ONLY if not JSON
+if not JSON_OUT:
+    print("========================")
 
 # ==========================
 # DEBUG OUTPUT FOLDER
@@ -116,25 +115,19 @@ def autodetect_fps(cap):
 # MAIN
 # ==========================
 cap = cv2.VideoCapture(VIDEO_PATH)
-
 fps = autodetect_fps(cap)
 
 ret, first_frame = cap.read()
 if not ret:
     print("Error: cannot read video")
-    print("========================")
     sys.exit(1)
 
 square_roi = find_square_roi(first_frame)
 if square_roi is None:
     print("Error: square not detected automatically")
-    print("========================")
     sys.exit(1)
 
 button_roi = compute_button_roi_from_square(square_roi, first_frame.shape)
-
-if not JSON_OUT:
-    print(f"Video FPS: {fps:.2f}" if fps else "Video FPS: unknown")
 
 if DEBUG:
     sx, sy, sw, sh = square_roi
@@ -205,11 +198,11 @@ result = {
 if JSON_OUT:
     print(json.dumps(result, indent=2))
 else:
+    print(f"Video FPS: {fps:.2f}" if fps else "Video FPS: unknown")
     print("\nLatency results:")
     print(f"Frames (avg={avg_frames}): {latencies_frames}")
     print(f"Millis (avg={avg_ms}): {latencies_ms}")
     print(f"\nDetected clicks: {click_index}")
     if DEBUG:
         print(f"\nScreenshots saved to folder: {DEBUG_DIR}")
-
-print("========================")
+    print("========================")
